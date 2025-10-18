@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   Link2, 
   Rocket, 
@@ -27,6 +27,110 @@ import {
   Building,
   CheckSquare
 } from 'lucide-react';
+
+// Neural Network Animation Component
+const NeuralNetwork = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Node class
+    class Node {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+
+      constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1.5;
+      }
+
+      update(width: number, height: number) {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+
+      draw(ctx: CanvasRenderingContext2D) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(147, 51, 234, 0.15)';
+        ctx.fill();
+        
+        // Very subtle glow
+        ctx.shadowBlur = 3;
+        ctx.shadowColor = 'rgba(147, 51, 234, 0.1)';
+      }
+    }
+
+    // Create nodes
+    const nodes: Node[] = [];
+    const nodeCount = Math.floor((canvas.width * canvas.height) / 12000);
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push(new Node(Math.random() * canvas.width, Math.random() * canvas.height));
+    }
+
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update and draw nodes
+      nodes.forEach(node => {
+        node.update(canvas.width, canvas.height);
+        node.draw(ctx);
+      });
+
+      // Draw connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 180) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            const opacity = 0.12 * (1 - distance / 180);
+            ctx.strokeStyle = `rgba(147, 51, 234, ${opacity})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+};
 
 export default function CoreMindPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -104,9 +208,14 @@ export default function CoreMindPage() {
       </nav>
       
       {/* 1. Hero Section */}
-      <section className="bg-white py-20 relative overflow-hidden">
-        {/* Subtle background decoration */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-gray-50 to-transparent opacity-50"></div>
+      <section className="bg-gradient-to-br from-slate-50 via-white to-purple-50 py-20 relative overflow-hidden">
+        {/* Neural Network Background */}
+        <div className="absolute inset-0 z-0">
+          <NeuralNetwork />
+        </div>
+        
+        {/* Gradient Overlay - Subtle and clean */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/30 to-white/50 z-0"></div>
         
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
@@ -239,13 +348,7 @@ export default function CoreMindPage() {
       </section>
 
       {/* 4. For Developers (Dark Section) */}
-      <section id="developers" className="py-24 px-6 bg-gray-900 text-white relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
-        
+      <section id="developers" className="py-24 px-6 bg-gradient-to-br from-gray-900 via-slate-900 to-purple-950 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="mb-16">
             <div className="text-sm font-semibold text-purple-400 uppercase tracking-wider mb-4">FOR DEVELOPERS</div>
@@ -762,15 +865,7 @@ await agent.deploy();`}
       </section>
 
       {/* 13. Final CTA */}
-      <section className="py-32 px-6 bg-gray-900 relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '32px 32px'
-          }}></div>
-        </div>
-        
+      <section className="py-32 px-6 bg-gradient-to-br from-gray-900 via-slate-900 to-purple-950 relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
             Transform Your Enterprise.
