@@ -35,6 +35,9 @@ export default function Favicon1Page() {
           <a href="/favicon3" className="block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
             Test 3 (digital400-d.ico)
           </a>
+          <a href="/favicon4" className="block px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+            Test 4 (4.ico)
+          </a>
           <a href="/" className="block px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
             Home
           </a>

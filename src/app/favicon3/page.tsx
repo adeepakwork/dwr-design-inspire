@@ -40,6 +40,9 @@ export default function Favicon3Page() {
           <a href="/favicon2" className="block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             Test 2 (400.ico)
           </a>
+          <a href="/favicon4" className="block px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+            Test 4 (4.ico)
+          </a>
           <button 
             onClick={() => window.location.reload()}
             className="block w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
