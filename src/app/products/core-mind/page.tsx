@@ -239,24 +239,24 @@ export default function CoreMindPage() {
           {/* Stats Grid */}
           <div className="grid md:grid-cols-3 gap-16 mb-20">
             <div>
-              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">DEPLOYMENTS</div>
-              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">150+</div>
+              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">ACTIVE USERS</div>
+              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">50K+</div>
               <p className="text-gray-600 leading-relaxed">
-                150+ Successful Projects Delivered. We've transformed ideas into reality for over 150 clients across various industries.
+                Growing community of developers and enterprises building with Core Mind AI platform.
               </p>
             </div>
             <div>
-              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">EXPERIENCE</div>
-              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">10+</div>
+              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">UPTIME</div>
+              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">99.9%</div>
               <p className="text-gray-600 leading-relaxed">
-                10+ Years of Experience. A decade of expertise in delivering innovative AI and automation solutions.
+                Enterprise-grade reliability with minimal downtime for mission-critical AI applications.
               </p>
             </div>
             <div>
-              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">SUCCESSFUL</div>
-              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">98%</div>
+              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">AI MODELS</div>
+              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">25+</div>
               <p className="text-gray-600 leading-relaxed">
-                98% Client Satisfaction Rate. Our clients trust us to exceed their expectations with every project.
+                Support for all major AI models from OpenAI, Anthropic, Google, and open-source options.
               </p>
             </div>
           </div>
