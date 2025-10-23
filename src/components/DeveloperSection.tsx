@@ -227,9 +227,6 @@ const MobileDeveloperCarousel = memo(() => {
           <div className={`w-2 h-2 rounded-full transition-colors ${
             isAutoPlaying ? 'bg-green-400' : 'bg-gray-500'
           }`} />
-          <span className="text-xs text-gray-500">
-            {isAutoPlaying ? 'Auto' : 'Manual'}
-          </span>
         </div>
       </div>
     </div>

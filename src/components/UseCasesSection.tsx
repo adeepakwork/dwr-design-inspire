@@ -237,9 +237,6 @@ const MobileUseCaseCarousel = memo(() => {
           <div className={`w-2 h-2 rounded-full transition-colors ${
             isAutoPlaying ? 'bg-green-500' : 'bg-gray-400'
           }`} />
-          <span className="text-xs text-gray-400">
-            {isAutoPlaying ? 'Auto' : 'Manual'}
-          </span>
         </div>
       </div>
     </div>
