@@ -1,10 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { 
-  Link2, 
-  Rocket, 
-  Shield, 
   Plug, 
   Database, 
   Lock, 
@@ -25,117 +22,21 @@ import {
   Key,
   ClipboardList,
   Building,
-  CheckSquare
+  CheckSquare,
+  Link2,
+  Rocket
 } from 'lucide-react';
 
-// Neural Network Animation Component
-const NeuralNetwork = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Node class
-    class Node {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-
-      constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = Math.random() * 2 + 1.5;
-      }
-
-      update(width: number, height: number) {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-      }
-
-      draw(ctx: CanvasRenderingContext2D) {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(147, 51, 234, 0.15)';
-        ctx.fill();
-        
-        // Very subtle glow
-        ctx.shadowBlur = 3;
-        ctx.shadowColor = 'rgba(147, 51, 234, 0.1)';
-      }
-    }
-
-    // Create nodes
-    const nodes: Node[] = [];
-    const nodeCount = Math.floor((canvas.width * canvas.height) / 12000);
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push(new Node(Math.random() * canvas.width, Math.random() * canvas.height));
-    }
-
-    // Animation loop
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Update and draw nodes
-      nodes.forEach(node => {
-        node.update(canvas.width, canvas.height);
-        node.draw(ctx);
-      });
-
-      // Draw connections
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 180) {
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            const opacity = 0.12 * (1 - distance / 180);
-            ctx.strokeStyle = `rgba(147, 51, 234, ${opacity})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
-};
+// Import Components
+import Navigation from '@/components/Navigation';
+import HeroSection from '@/components/HeroSection';
+import ValueProposition from '@/components/ValueProposition';
+import ManagementConsole from '@/components/ManagementConsole';
+import Testimonials from '@/components/Testimonials';
+import FAQSection from '@/components/FAQSection';
+import Footer from '@/components/Footer';
 
 export default function CoreMindPage() {
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-
   const faqs = [
     {
       question: "What deployment options does Core Mind offer?",
@@ -182,127 +83,16 @@ export default function CoreMindPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      
       {/* Navigation */}
-      <nav className="border-b border-gray-200 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <div className="flex items-center gap-2">
-              <div className="text-2xl font-bold">
-                <span className="text-gray-900">digital</span>
-                <span className="text-purple-600">400</span>
-              </div>
-            </div>
-            <div className="hidden md:flex items-center gap-10">
-              <a href="#about" className="text-gray-700 hover:text-purple-600 text-sm font-medium uppercase tracking-wide transition-colors">About</a>
-              <a href="#projects" className="text-gray-700 hover:text-purple-600 text-sm font-medium uppercase tracking-wide transition-colors">Projects</a>
-              <a href="#services" className="text-gray-700 hover:text-purple-600 text-sm font-medium uppercase tracking-wide transition-colors">Services</a>
-              <a href="#blog" className="text-gray-700 hover:text-purple-600 text-sm font-medium uppercase tracking-wide transition-colors">Blog</a>
-              <a href="#contact" className="text-gray-700 hover:text-purple-600 text-sm font-medium uppercase tracking-wide transition-colors">Contact</a>
-              <button className="px-6 py-2.5 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors text-sm font-medium uppercase tracking-wide">
-                GET IN TOUCH
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
       
-      {/* 1. Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 via-white to-purple-50 py-20 relative overflow-hidden">
-        {/* Neural Network Background */}
-        <div className="absolute inset-0 z-0">
-          <NeuralNetwork />
-        </div>
-        
-        {/* Gradient Overlay - Subtle and clean */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/30 to-white/50 z-0"></div>
-        
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          {/* Breadcrumb */}
-          <div className="text-sm text-gray-500 mb-8 uppercase tracking-wide">
-            HOME / <span className="text-purple-600 font-semibold">PRODUCTS / CORE MIND</span>
-          </div>
+      {/* Hero Section */}
+      <HeroSection />
+      
+      {/* Value Proposition */}
+      <ValueProposition />
 
-          {/* Product Name */}
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-purple-900 bg-clip-text text-transparent">Core Mind</h2>
-            <p className="text-sm text-purple-600 uppercase tracking-wider mt-1 font-semibold">AI Backbone Platform</p>
-          </div>
-
-          {/* Main Heading */}
-          <div className="max-w-5xl mb-12 md:mb-20">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-0">
-              The AI platform that empowers businesses to innovate, automate, and scale with confidence.
-            </h1>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 mb-12 md:mb-20">
-            <div className="text-center sm:text-left">
-              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">ACTIVE USERS</div>
-              <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 mb-4">50K+</div>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Growing community of developers and enterprises building with Core Mind AI platform.
-              </p>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">UPTIME</div>
-              <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 mb-4">99.9%</div>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Enterprise-grade reliability with minimal downtime for mission-critical AI applications.
-              </p>
-            </div>
-            <div className="text-center sm:text-left sm:col-span-2 md:col-span-1">
-              <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">AI MODELS</div>
-              <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 mb-4">25+</div>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Support for all major AI models from OpenAI, Anthropic, Google, and open-source options.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Value Proposition Cards */}
-      <section id="features" className="py-16 md:py-24 px-4 md:px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                icon: Link2,
-                title: "Connect Everything",
-                description: "Integrate data, tools, and APIs effortlessly."
-              },
-              {
-                icon: Rocket,
-                title: "Deploy Instantly",
-                description: "Launch secure AI agents into workflows without complexity."
-              },
-              {
-                icon: Shield,
-                title: "Operate Securely",
-                description: "Enterprise-grade compliance and control by design."
-              }
-            ].map((card, index) => {
-              const IconComponent = card.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white p-8 hover:shadow-lg hover:border-purple-100 transition-all duration-300 border border-transparent"
-                >
-                  <div className="mb-6">
-                    <IconComponent className="w-10 h-10 text-purple-600" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-900">{card.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm">{card.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. For Enterprises */}
+      {/* Enterprise Features */}
       <section id="enterprise" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
@@ -347,7 +137,7 @@ export default function CoreMindPage() {
         </div>
       </section>
 
-      {/* 4. For Developers (Dark Section) */}
+      {/* Developer Section */}
       <section id="developers" className="py-24 px-6 bg-gradient-to-br from-gray-900 via-slate-900 to-purple-950 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="mb-16">
@@ -427,140 +217,10 @@ await agent.deploy();`}
         </div>
       </section>
 
-      {/* 5. Platform Architecture */}
-      <section className="py-24 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-16">
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">HOW IT WORKS</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Four Simple Steps to AI Transformation
-            </h2>
-          </div>
+      {/* Management Console */}
+      <ManagementConsole />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {[
-              {
-                step: "01",
-                icon: Link2,
-                title: "Connect",
-                description: "Integrate data, APIs, and systems seamlessly."
-              },
-              {
-                step: "02",
-                icon: Settings,
-                title: "Orchestrate",
-                description: "Build agents with zero AI ops complexity."
-              },
-              {
-                step: "03",
-                icon: Rocket,
-                title: "Deploy",
-                description: "Choose cloud or private environments instantly."
-              },
-              {
-                step: "04",
-                icon: BarChart3,
-                title: "Manage",
-                description: "Unified dashboard for complete control."
-              }
-            ].map((step, index) => {
-              const IconComponent = step.icon;
-              return (
-                <div key={index}>
-                  <div className="bg-white p-8 hover:shadow-md hover:border-purple-100 transition-all duration-300 border border-transparent">
-                    <div className="text-sm font-bold text-purple-600 mb-4">{step.step}</div>
-                    <div className="mb-4">
-                      <IconComponent className="w-8 h-8 text-purple-600" strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-lg font-bold mb-2 text-gray-900">{step.title}</h3>
-                    <p className="text-gray-600 text-sm">{step.description}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Unified Management Console */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-16">
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">MANAGEMENT CONSOLE</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Everything You Need in One Dashboard
-            </h2>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Dashboard Preview - Mockup */}
-            <div className="bg-gray-100 p-8 rounded">
-              <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-                {/* Dashboard Header */}
-                <div className="bg-gray-900 px-6 py-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <span className="text-sm text-gray-400 font-mono">Core Mind Dashboard</span>
-                </div>
-                {/* Dashboard Content */}
-                <div className="p-6">
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    <div className="bg-gray-50 p-4 rounded">
-                      <div className="text-xs text-gray-500 mb-1">Active Agents</div>
-                      <div className="text-2xl font-bold text-gray-900">24</div>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded">
-                      <div className="text-xs text-gray-500 mb-1">API Calls</div>
-                      <div className="text-2xl font-bold text-gray-900">1.2M</div>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded">
-                      <div className="text-xs text-gray-500 mb-1">Uptime</div>
-                      <div className="text-2xl font-bold text-gray-900">99.9%</div>
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 rounded p-4 flex items-end gap-2 h-32">
-                    <div className="bg-gray-900 w-full h-12 rounded-t"></div>
-                    <div className="bg-gray-900 w-full h-20 rounded-t"></div>
-                    <div className="bg-gray-900 w-full h-16 rounded-t"></div>
-                    <div className="bg-gray-900 w-full h-24 rounded-t"></div>
-                    <div className="bg-gray-900 w-full h-28 rounded-t"></div>
-                    <div className="bg-gray-900 w-full h-20 rounded-t"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Feature List */}
-            <div className="space-y-6">
-              {[
-                { icon: Bot, text: "Manage agents, data sources, and tools" },
-                { icon: BarChart3, text: "Track usage, cost, and performance in real-time" },
-                { icon: Zap, text: "One-click updates and deployments" },
-                { icon: Users, text: "Define roles and granular permissions" },
-                { icon: ClipboardList, text: "View comprehensive audit logs" }
-              ].map((feature, index) => {
-                const IconComponent = feature.icon;
-                return (
-                  <div
-                    key={index}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="mt-1">
-                      <IconComponent className="w-6 h-6 text-purple-600" strokeWidth={1.5} />
-                    </div>
-                    <p className="text-gray-700">{feature.text}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Use Cases */}
+      {/* Use Cases */}
       <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-16">
@@ -622,7 +282,7 @@ await agent.deploy();`}
         </div>
       </section>
 
-      {/* 8. Security & Compliance */}
+      {/* Security & Compliance */}
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-16">
@@ -659,44 +319,10 @@ await agent.deploy();`}
         </div>
       </section>
 
-      {/* 9. Testimonials */}
-      <section className="py-24 px-6 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="mb-16">
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">TESTIMONIALS</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Trusted by Industry Leaders
-            </h2>
-          </div>
+      {/* Testimonials */}
+      <Testimonials testimonials={testimonials} />
 
-          <div className="bg-white p-6 md:p-12 border-l-4 border-purple-600">
-            <div className="text-4xl md:text-5xl text-purple-200 mb-4 md:mb-6">"</div>
-            <p className="text-lg md:text-xl text-gray-700 mb-6 md:mb-8 leading-relaxed">
-              {testimonials[activeTestimonial].quote}
-            </p>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <p className="font-bold text-base md:text-lg text-gray-900">{testimonials[activeTestimonial].author}</p>
-                <p className="text-gray-600 text-sm">{testimonials[activeTestimonial].role}</p>
-                <p className="text-purple-600 font-semibold text-sm">{testimonials[activeTestimonial].company}</p>
-              </div>
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveTestimonial(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === activeTestimonial ? 'bg-purple-600 w-8' : 'bg-gray-300 w-2'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. Pricing */}
+      {/* Pricing */}
       <section id="pricing" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-16">
@@ -787,84 +413,10 @@ await agent.deploy();`}
         </div>
       </section>
 
-      {/* 11. FAQ */}
-      <section className="py-24 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="mb-16">
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">FAQ</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Frequently Asked Questions
-            </h2>
-          </div>
+      {/* FAQ */}
+      <FAQSection faqs={faqs} />
 
-          <div className="space-y-2">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 overflow-hidden"
-              >
-                <button
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                  className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
-                >
-                  <span className="font-semibold pr-8 text-gray-900">{faq.question}</span>
-                  <span className={`text-xl text-purple-600 transition-transform duration-300 ${activeFaq === index ? 'rotate-180' : ''}`}>
-                    ▼
-                  </span>
-                </button>
-                {activeFaq === index && (
-                  <div className="px-6 pb-6 border-t border-gray-100">
-                    <p className="text-gray-600 leading-relaxed pt-4">{faq.answer}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 12. Comparison Table */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="mb-16">
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">COMPARISON</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Core Mind vs Traditional AI Projects
-            </h2>
-          </div>
-
-          <div className="bg-white border border-gray-200 overflow-hidden">
-            <div className="grid grid-cols-3 gap-px bg-gray-200">
-              <div className="bg-white p-6"></div>
-              <div className="bg-white p-6 text-center">
-                <h3 className="font-bold text-sm text-gray-600 uppercase tracking-wide">Traditional AI</h3>
-              </div>
-              <div className="bg-gray-900 p-6 text-center">
-                <h3 className="font-bold text-sm text-white uppercase tracking-wide">Core Mind</h3>
-              </div>
-
-              {[
-                { aspect: "Setup Time", traditional: "3-6 months", coremind: "Hours" },
-                { aspect: "Cost", traditional: "$200K+ infrastructure", coremind: "Pay as you go" },
-                { aspect: "Expertise Required", traditional: "ML engineers, DevOps", coremind: "Any developer" },
-                { aspect: "Integration", traditional: "Complex custom work", coremind: "Pre-built connectors" },
-                { aspect: "Scalability", traditional: "Manual provisioning", coremind: "Auto-scaling" },
-                { aspect: "Security", traditional: "Build from scratch", coremind: "Enterprise-ready" }
-              ].map((row, index) => (
-                <>
-                  <div className="bg-white p-6 font-bold text-gray-900 text-sm">{row.aspect}</div>
-                  <div className="bg-white p-6 text-center text-gray-500 text-sm">{row.traditional}</div>
-                  <div className="bg-gray-50 p-6 text-center text-gray-900 font-semibold text-sm">
-                    {row.coremind}
-                  </div>
-                </>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 13. Final CTA */}
+      {/* Final CTA */}
       <section className="py-32 px-6 bg-gradient-to-br from-gray-900 via-slate-900 to-purple-950 relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">
@@ -887,15 +439,7 @@ await agent.deploy();`}
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-black text-white border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <div className="text-xl font-bold mb-2">
-            <span className="text-white">digital</span>
-            <span className="text-purple-500">400</span>
-          </div>
-          <p className="text-gray-500 text-sm">© 2025 digital400. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
