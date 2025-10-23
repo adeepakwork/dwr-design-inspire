@@ -8,30 +8,20 @@ import {
   CheckCircle, 
   Settings, 
   BarChart3,
-  Bot,
-  Zap,
-  Network,
-  MessageSquare,
-  Users,
-  Search,
-  Code,
-  Headphones,
-  Cog,
-  PieChart,
   ShieldCheck,
   Key,
   ClipboardList,
   Building,
-  CheckSquare,
-  Link2,
-  Rocket
+  CheckSquare
 } from 'lucide-react';
 
 // Import Components
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import ValueProposition from '@/components/ValueProposition';
+import { DeveloperSection } from '@/components/DeveloperSection';
 import ManagementConsole from '@/components/ManagementConsole';
+import { UseCasesSection } from '@/components/UseCasesSection';
 import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
@@ -138,149 +128,13 @@ export default function CoreMindPage() {
       </section>
 
       {/* Developer Section */}
-      <section id="developers" className="py-24 px-6 bg-gradient-to-br from-gray-900 via-slate-900 to-purple-950 text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <div className="mb-16">
-            <div className="text-sm font-semibold text-purple-400 uppercase tracking-wider mb-4">FOR DEVELOPERS</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Build Smart Apps Without the AI Ops
-            </h2>
-            <p className="text-lg text-gray-400 max-w-2xl">
-              Core Mind handles orchestration so you can focus on innovation.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
-            {[
-              {
-                icon: Bot,
-                title: "Agent Creation",
-                description: "Define intelligent agents easily with our intuitive builder."
-              },
-              {
-                icon: Zap,
-                title: "Simple Integrations",
-                description: "Add AI with just a few lines of code using our SDK."
-              },
-              {
-                icon: Network,
-                title: "MCP Connections",
-                description: "Link data sources and APIs with Model Context Protocol."
-              },
-              {
-                icon: MessageSquare,
-                title: "Conversation Management",
-                description: "Securely manage multi-turn interactions and context."
-              }
-            ].map((card, index) => {
-              const IconComponent = card.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-gray-800 p-4 md:p-6 hover:bg-gray-700 hover:border-purple-500/30 transition-all duration-300 border border-transparent"
-                >
-                  <div className="mb-4">
-                    <IconComponent className="w-6 md:w-8 h-6 md:h-8 text-purple-400" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-sm md:text-base font-bold mb-2 text-white">{card.title}</h3>
-                  <p className="text-gray-400 text-xs">{card.description}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Code Snippet Preview */}
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-black rounded-lg overflow-hidden shadow-2xl border border-gray-800">
-              <div className="flex items-center gap-2 px-3 md:px-4 py-3 bg-gray-950 border-b border-gray-800">
-                <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-red-500"></div>
-                <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-green-500"></div>
-                <span className="ml-2 md:ml-4 text-gray-500 text-xs md:text-sm font-mono">app.ts</span>
-              </div>
-              <div className="p-4 md:p-8 overflow-x-auto">
-                <pre className="text-green-400 text-xs leading-relaxed font-mono whitespace-pre-wrap">
-{`import { CoreMind } from '@core-mind/sdk';
-
-const agent = await CoreMind.createAgent({
-  name: 'Customer Support Agent',
-  model: 'gpt-4',
-  tools: ['zendesk', 'slack', 'knowledge-base'],
-  permissions: ['read', 'respond']
-});
-
-await agent.deploy();`}
-                </pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DeveloperSection />
 
       {/* Management Console */}
       <ManagementConsole />
 
       {/* Use Cases */}
-      <section className="py-24 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-16">
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">USE CASES</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Endless Possibilities
-            </h2>
-            <p className="text-gray-600 text-lg">See how Core Mind transforms different workflows</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                icon: Users,
-                title: "AI-Powered Teams",
-                description: "Automatically summarize meetings, extract action items, and assign tasks to team members."
-              },
-              {
-                icon: Search,
-                title: "Data Intelligence Assistants",
-                description: "Enable natural language search across databases and documents for instant insights."
-              },
-              {
-                icon: Code,
-                title: "Developer Copilots",
-                description: "Embed context-aware AI copilots directly into your applications and workflows."
-              },
-              {
-                icon: Headphones,
-                title: "Customer Support Agents",
-                description: "Deploy intelligent chatbots that understand context and resolve issues faster."
-              },
-              {
-                icon: Cog,
-                title: "Process Automation",
-                description: "Automate complex business workflows with intelligent decision-making capabilities."
-              },
-              {
-                icon: PieChart,
-                title: "Analytics & Reporting",
-                description: "Generate insights and reports from unstructured data automatically."
-              }
-            ].map((useCase, index) => {
-              const IconComponent = useCase.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white p-8 hover:shadow-md hover:border-purple-100 transition-all duration-300 border border-transparent"
-                >
-                  <div className="mb-4">
-                    <IconComponent className="w-10 h-10 text-purple-600" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-lg font-bold mb-3 text-gray-900">{useCase.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{useCase.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <UseCasesSection />
 
       {/* Security & Compliance */}
       <section className="py-24 px-6 bg-white">
