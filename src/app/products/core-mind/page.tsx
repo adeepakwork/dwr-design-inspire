@@ -230,32 +230,32 @@ export default function CoreMindPage() {
           </div>
 
           {/* Main Heading */}
-          <div className="max-w-5xl mb-20">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-0">
+          <div className="max-w-5xl mb-12 md:mb-20">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-0">
               The AI platform that empowers businesses to innovate, automate, and scale with confidence.
             </h1>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid md:grid-cols-3 gap-16 mb-20">
-            <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 mb-12 md:mb-20">
+            <div className="text-center sm:text-left">
               <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">ACTIVE USERS</div>
-              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">50K+</div>
-              <p className="text-gray-600 leading-relaxed">
+              <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 mb-4">50K+</div>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                 Growing community of developers and enterprises building with Core Mind AI platform.
               </p>
             </div>
-            <div>
+            <div className="text-center sm:text-left">
               <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">UPTIME</div>
-              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">99.9%</div>
-              <p className="text-gray-600 leading-relaxed">
+              <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 mb-4">99.9%</div>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                 Enterprise-grade reliability with minimal downtime for mission-critical AI applications.
               </p>
             </div>
-            <div>
+            <div className="text-center sm:text-left sm:col-span-2 md:col-span-1">
               <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-4">AI MODELS</div>
-              <div className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">25+</div>
-              <p className="text-gray-600 leading-relaxed">
+              <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 mb-4">25+</div>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                 Support for all major AI models from OpenAI, Anthropic, Google, and open-source options.
               </p>
             </div>
@@ -264,9 +264,9 @@ export default function CoreMindPage() {
       </section>
 
       {/* 2. Value Proposition Cards */}
-      <section id="features" className="py-24 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
+      <section id="features" className="py-16 md:py-24 px-4 md:px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: Link2,
@@ -319,7 +319,7 @@ export default function CoreMindPage() {
               </p>
             </div>
             
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               {[
                 { icon: Plug, title: "Seamless Integrations", desc: "Connect Teams, Slack, CRMs" },
                 { icon: Database, title: "Data Connectivity", desc: "Link databases and knowledge bases" },
@@ -332,12 +332,12 @@ export default function CoreMindPage() {
                 return (
                   <div
                     key={index}
-                    className="bg-white p-6 border border-gray-200 hover:shadow-md hover:border-purple-200 transition-all duration-300"
+                    className="bg-white p-4 md:p-6 border border-gray-200 hover:shadow-md hover:border-purple-200 transition-all duration-300"
                   >
                     <div className="mb-3">
-                      <IconComponent className="w-8 h-8 text-purple-600" strokeWidth={1.5} />
+                      <IconComponent className="w-6 md:w-8 h-6 md:h-8 text-purple-600" strokeWidth={1.5} />
                     </div>
-                    <h4 className="font-bold mb-2 text-sm text-gray-900">{feature.title}</h4>
+                    <h4 className="font-bold mb-2 text-sm md:text-sm text-gray-900">{feature.title}</h4>
                     <p className="text-xs text-gray-500">{feature.desc}</p>
                   </div>
                 );
@@ -360,7 +360,7 @@ export default function CoreMindPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
             {[
               {
                 icon: Bot,
@@ -387,12 +387,12 @@ export default function CoreMindPage() {
               return (
                 <div
                   key={index}
-                  className="bg-gray-800 p-6 hover:bg-gray-700 hover:border-purple-500/30 transition-all duration-300 border border-transparent"
+                  className="bg-gray-800 p-4 md:p-6 hover:bg-gray-700 hover:border-purple-500/30 transition-all duration-300 border border-transparent"
                 >
                   <div className="mb-4">
-                    <IconComponent className="w-8 h-8 text-purple-400" strokeWidth={1.5} />
+                    <IconComponent className="w-6 md:w-8 h-6 md:h-8 text-purple-400" strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-base font-bold mb-2 text-white">{card.title}</h3>
+                  <h3 className="text-sm md:text-base font-bold mb-2 text-white">{card.title}</h3>
                   <p className="text-gray-400 text-xs">{card.description}</p>
                 </div>
               );
@@ -402,14 +402,14 @@ export default function CoreMindPage() {
           {/* Code Snippet Preview */}
           <div className="max-w-4xl mx-auto">
             <div className="bg-black rounded-lg overflow-hidden shadow-2xl border border-gray-800">
-              <div className="flex items-center gap-2 px-4 py-3 bg-gray-950 border-b border-gray-800">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="ml-4 text-gray-500 text-sm font-mono">app.ts</span>
+              <div className="flex items-center gap-2 px-3 md:px-4 py-3 bg-gray-950 border-b border-gray-800">
+                <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-red-500"></div>
+                <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-green-500"></div>
+                <span className="ml-2 md:ml-4 text-gray-500 text-xs md:text-sm font-mono">app.ts</span>
               </div>
-              <div className="p-8">
-                <pre className="text-green-400 text-xs leading-relaxed font-mono">
+              <div className="p-4 md:p-8 overflow-x-auto">
+                <pre className="text-green-400 text-xs leading-relaxed font-mono whitespace-pre-wrap">
 {`import { CoreMind } from '@core-mind/sdk';
 
 const agent = await CoreMind.createAgent({
@@ -437,7 +437,7 @@ await agent.deploy();`}
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {[
               {
                 step: "01",
@@ -571,7 +571,7 @@ await agent.deploy();`}
             <p className="text-gray-600 text-lg">See how Core Mind transforms different workflows</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: Users,
@@ -633,7 +633,7 @@ await agent.deploy();`}
             <p className="text-gray-600">Built with security and compliance at its core</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
             {[
               { icon: ShieldCheck, title: "AES-256 + TLS 1.3", subtitle: "End-to-end Encryption" },
               { icon: Key, title: "RBAC & SSO", subtitle: "Access Control" },
@@ -645,12 +645,12 @@ await agent.deploy();`}
               return (
                 <div
                   key={index}
-                  className="bg-gray-50 p-6 text-center hover:bg-purple-50 transition-colors duration-300"
+                  className="bg-gray-50 p-4 md:p-6 text-center hover:bg-purple-50 transition-colors duration-300"
                 >
-                  <div className="mb-3 flex justify-center">
-                    <IconComponent className="w-8 h-8 text-purple-600" strokeWidth={1.5} />
+                  <div className="mb-2 md:mb-3 flex justify-center">
+                    <IconComponent className="w-6 md:w-8 h-6 md:h-8 text-purple-600" strokeWidth={1.5} />
                   </div>
-                  <h4 className="font-bold text-sm mb-1 text-gray-900">{badge.title}</h4>
+                  <h4 className="font-bold text-xs md:text-sm mb-1 text-gray-900">{badge.title}</h4>
                   <p className="text-xs text-gray-500">{badge.subtitle}</p>
                 </div>
               );
@@ -669,14 +669,14 @@ await agent.deploy();`}
             </h2>
           </div>
 
-          <div className="bg-white p-12 border-l-4 border-purple-600">
-            <div className="text-5xl text-purple-200 mb-6">"</div>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+          <div className="bg-white p-6 md:p-12 border-l-4 border-purple-600">
+            <div className="text-4xl md:text-5xl text-purple-200 mb-4 md:mb-6">"</div>
+            <p className="text-lg md:text-xl text-gray-700 mb-6 md:mb-8 leading-relaxed">
               {testimonials[activeTestimonial].quote}
             </p>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <p className="font-bold text-lg text-gray-900">{testimonials[activeTestimonial].author}</p>
+                <p className="font-bold text-base md:text-lg text-gray-900">{testimonials[activeTestimonial].author}</p>
                 <p className="text-gray-600 text-sm">{testimonials[activeTestimonial].role}</p>
                 <p className="text-purple-600 font-semibold text-sm">{testimonials[activeTestimonial].company}</p>
               </div>
@@ -707,7 +707,7 @@ await agent.deploy();`}
             <p className="text-gray-600">Choose the plan that fits your needs</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 name: "Startup",
@@ -753,21 +753,21 @@ await agent.deploy();`}
             ].map((plan, index) => (
               <div
                 key={index}
-                className={`p-8 border transition-shadow duration-300 ${
+                className={`p-6 md:p-8 border transition-shadow duration-300 ${
                   plan.highlighted
                     ? 'bg-gray-900 text-white border-gray-900'
                     : 'bg-white border-gray-200 hover:shadow-md'
                 }`}
               >
-                <h3 className="text-xl font-bold mb-4 uppercase tracking-wide">{plan.name}</h3>
-                <div className="mb-8">
-                  <span className="text-4xl font-bold">{plan.price}</span>
+                <h3 className="text-lg md:text-xl font-bold mb-4 uppercase tracking-wide">{plan.name}</h3>
+                <div className="mb-6 md:mb-8">
+                  <span className="text-3xl md:text-4xl font-bold">{plan.price}</span>
                   <span className={plan.highlighted ? "text-gray-400" : "text-gray-500"}>{plan.period}</span>
                 </div>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3 text-sm">
-                      <span className="text-green-500">✓</span>
+                      <span className="text-green-500 mt-0.5">✓</span>
                       <span className={plan.highlighted ? "text-gray-300" : "text-gray-600"}>{feature}</span>
                     </li>
                   ))}
@@ -875,11 +875,11 @@ await agent.deploy();`}
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
             Core Mind makes AI adoption simple, secure, and scalable — for every organization.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="px-10 py-4 bg-purple-600 text-white text-sm font-semibold uppercase tracking-wide hover:bg-purple-700 transition-colors duration-300">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
+            <button className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-purple-600 text-white text-sm font-semibold uppercase tracking-wide hover:bg-purple-700 transition-colors duration-300">
               Request a Demo
             </button>
-            <button className="px-10 py-4 border-2 border-purple-400 text-white text-sm font-semibold uppercase tracking-wide hover:bg-purple-600 hover:border-purple-600 transition-all duration-300">
+            <button className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 border-2 border-purple-400 text-white text-sm font-semibold uppercase tracking-wide hover:bg-purple-600 hover:border-purple-600 transition-all duration-300">
               Talk to Sales
             </button>
           </div>
